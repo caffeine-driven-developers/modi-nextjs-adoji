@@ -1,24 +1,25 @@
 import { useTypedSelector } from '../../src/store';
 import { useCallback } from 'react';
-import { counterActions } from '../../src/store/reducers/counter';
+import { actions } from '../../src/store/reducers/counter';
 import { useDispatch } from 'react-redux';
+import { wrapWithDispatch } from '../../src/utils.ts';
 
 export default function Counter() {
-  const dispatch = useDispatch();
+  const counterActions = wrapWithDispatch(useDispatch(), actions);
 
   const count = useTypedSelector(state => state.counter);
   const handleClickIncrement = useCallback(() => {
-    dispatch(counterActions.increment());
+    counterActions.increment();
   }, []);
   const handleClickDecrement = useCallback(() => {
-    dispatch(counterActions.decrement());
+    const a = counterActions.decrement();
   }, []);
   const handleClickReset = useCallback(() => {
-    dispatch(counterActions.reset(0));
+    counterActions.reset(0);
   }, []);
 
   return (
-    <div>
+    <div className="container-fluid">
       counter template! {count}
       <br />
       <button onClick={handleClickIncrement}>+</button>
