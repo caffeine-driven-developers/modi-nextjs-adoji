@@ -1,9 +1,10 @@
 import { createStore, applyMiddleware } from 'redux';
 import reducer from './reducers';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 export const makeStore = (initialState, options) => {
-  const store = createStore(reducer, initialState, applyMiddleware());
+  const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware()));
   // TODO: apply middleware
   return store;
 };
