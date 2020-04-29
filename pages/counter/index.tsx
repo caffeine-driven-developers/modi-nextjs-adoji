@@ -20,7 +20,7 @@ export default function Counter() {
 
   return (
     <div className="container-fluid">
-      counter template! {count}
+      counter template! {count} {typeof count}
       <br />
       <button onClick={handleClickIncrement}>+</button>
       <button onClick={handleClickDecrement}>-</button>

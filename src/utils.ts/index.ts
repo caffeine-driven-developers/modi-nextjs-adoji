@@ -5,7 +5,9 @@ type ActionsType = { [key: string]: ActionCreator<string> };
 export function wrapWithDispatch<T extends ActionsType>(dispatch: Dispatch, actions: T) {
   const res = {};
   Object.keys(actions).forEach(key => {
-    res[key] = (...params: any[]) => dispatch(actions[key](params));
+    res[key] = function () {
+      dispatch(actions[key].apply(null, arguments));
+    };
   });
   return res as T;
 }
