@@ -11,6 +11,7 @@ import 'normalize.css';
 import '@blueprintjs/core/lib/css/blueprint.css';
 import '@blueprintjs/icons/lib/css/blueprint-icons.css';
 import 'bootstrap/dist/css/bootstrap-grid.min.css';
+import './style.css';
 
 export default withRedux(makeStore, { debug: true })(
   class MyApp extends App<{ store: ReturnType<typeof makeStore> }> {
