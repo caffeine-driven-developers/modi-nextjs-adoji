@@ -1,18 +1,15 @@
 import { Card, Elevation } from '@blueprintjs/core';
+import { MouseEventHandler } from 'react';
+import { SearchedMovie } from '../services/search';
 
-type SearchedMovieCardProps = {
-  Title: string;
-  Poster: string;
-  Type: string;
-  Year: string;
-  imdbId: string;
-  className: string;
+type SearchedMovieCardProps = SearchedMovie & {
+  onClick: MouseEventHandler;
 };
 
 export default function SearchedMovieCard(props: SearchedMovieCardProps) {
   return (
     <div className="wrapper">
-      <Card className={props.className} interactive={true} elevation={Elevation.TWO}>
+      <Card interactive elevation={Elevation.TWO} onClick={props.onClick}>
         <h5 className="title bp3-heading">
           {props.Title} ({props.Year})
         </h5>
