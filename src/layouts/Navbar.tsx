@@ -10,12 +10,17 @@ export default function MyNavbar() {
     (evt: FormEvent) => {
       evt.preventDefault();
 
-      // TODO: change title to search
-      router.push('/movies?title=' + searchString);
+      router.push('/movies?search=' + searchString);
       setSearchString('');
     },
     [searchString],
   );
+  const handleClickMovies = useCallback(() => {
+    if (router.pathname.startsWith('/movies')) {
+      return;
+    }
+    router.push('/movies');
+  }, [router.pathname]);
 
   return (
     <div>
@@ -29,11 +34,9 @@ export default function MyNavbar() {
 
           <Navbar.Divider />
 
-          <Link href="/movies">
-            <Button className="bp3-minimal" icon="build">
-              Movies
-            </Button>
-          </Link>
+          <Button className="bp3-minimal" icon="build" onClick={handleClickMovies}>
+            Movies
+          </Button>
 
           <Link href="/counter">
             <Button className="bp3-minimal" icon="build">
@@ -44,6 +47,7 @@ export default function MyNavbar() {
         <Navbar.Group align={Alignment.RIGHT}>
           <form onSubmit={handleSubmitSearch}>
             <InputGroup
+              id="navbar_search_input"
               leftIcon="search"
               type="search"
               placeholder="e.g. Frozen"
