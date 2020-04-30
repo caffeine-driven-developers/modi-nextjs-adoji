@@ -56,23 +56,26 @@ export default function Movies() {
   }
 
   if (data.Response === 'False') {
-    return <div>no such movie</div>;
+    return (
+      <div className="wrapper">
+        <h2>Movie Not Found</h2>
+        <p>Try another title</p>
+        <style jsx>{`
+          .wrapper {
+            padding-top: 30vh;
+            text-align: center;
+          }
+        `}</style>
+      </div>
+    );
   }
 
   return (
     <div className="container">
       <h1>Search result for "{s}"</h1>
       {data.Search.map(x => (
-        <SearchedMovieCard className="s-movie-card" key={x.imdbID} {...x} />
+        <SearchedMovieCard key={x.imdbID} {...x} />
       ))}
-      <style jsx global>{`
-        .s-movie-card {
-          margin-bottom: 1rem;
-          margin-right: 1rem;
-          width: 15rem;
-          display: inline-block;
-        }
-      `}</style>
     </div>
   );
 }
