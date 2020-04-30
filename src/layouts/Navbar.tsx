@@ -47,6 +47,7 @@ export default function MyNavbar() {
               leftIcon="search"
               type="search"
               placeholder="e.g. Frozen"
+              value={searchString}
               onChange={e => {
                 setSearchString(e.target.value);
               }}
