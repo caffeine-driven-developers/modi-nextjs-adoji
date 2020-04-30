@@ -1,8 +1,7 @@
 import { useRouter } from 'next/dist/client/router';
 import { useSearch, SearchedMovie } from '../../src/services/search';
 import SearchedMovieCard from '../../src/components/SearchedMovieCard';
-import { Callout, Icon, Spinner } from '@blueprintjs/core';
-import { useCallback } from 'react';
+import { Icon, Spinner, Alert } from '@blueprintjs/core';
 
 type Query = string | null;
 export default function Movies() {
@@ -71,15 +70,11 @@ export default function Movies() {
     );
   }
 
-  const handleClickCard = (x: SearchedMovie) => {
-    console.log('m,', x);
-  };
-
   return (
     <div className="container">
       <h1>Search result for "{s}"</h1>
       {data.Search.map((x: SearchedMovie) => (
-        <SearchedMovieCard onClick={() => handleClickCard(x)} key={x.imdbID} {...x} />
+        <SearchedMovieCard key={x.imdbID} {...x} />
       ))}
     </div>
   );
