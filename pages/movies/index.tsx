@@ -1,5 +1,5 @@
 import { useRouter } from 'next/dist/client/router';
-import { useSearch, SearchedMovie } from '../../src/services/search';
+import { useSearch, SearchedMovie } from '../../src/services/omdb';
 import SearchedMovieCard from '../../src/components/SearchedMovieCard';
 import { Icon, Spinner, Alert } from '@blueprintjs/core';
 
@@ -58,7 +58,7 @@ export default function Movies() {
   if (data.Response === 'False') {
     return (
       <div className="wrapper">
-        <h2>Movie Not Found</h2>
+        <h2>Movie "{s}" Not Found</h2>
         <p>Try another title</p>
         <style jsx>{`
           .wrapper {
