@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "@blueprintjs/core": "^3.26.0",
+    "antd": "^4.2.0",
     "axios": "^0.19.2",
+    "babel-plugin-import": "^1.13.0",
     "bootstrap": "^4.4.1",
     "deep-copy": "^1.4.2",
     "deox": "^3.2.1",

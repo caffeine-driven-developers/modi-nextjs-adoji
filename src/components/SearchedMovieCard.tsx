@@ -1,6 +1,6 @@
 import { Card, Elevation } from '@blueprintjs/core';
-import { MouseEventHandler, useState, useCallback } from 'react';
-import { SearchedMovie } from '../services/search';
+import { useState, useCallback } from 'react';
+import { SearchedMovie, useMovie } from '../services/omdb';
 import { Alert } from '@blueprintjs/core';
 
 type SearchedMovieCardProps = SearchedMovie & {};
@@ -10,6 +10,7 @@ export default function SearchedMovieCard(props: SearchedMovieCardProps) {
   const handleClickCard = useCallback(() => {
     setIsModalOpen(true);
   }, []);
+  const { data } = useMovie(isModalOpen ? props.imdbID : null);
 
   return (
     <div className="wrapper">
@@ -21,21 +22,30 @@ export default function SearchedMovieCard(props: SearchedMovieCardProps) {
       </Card>
 
       <Alert
+        className="alert"
         isOpen={isModalOpen}
         canEscapeKeyCancel
         canOutsideClickCancel
         onClose={() => {
           setIsModalOpen(false);
         }}
+        confirmButtonText="Close"
+        style={{ width: '60vw', maxWidth: '100vw' }}
       >
-        <pre>{JSON.stringify(props, null, 2)}</pre>
+        {data && (
+          <div className="modal-content">
+            <h1 className="bp3-heading title">
+              {data.Production} - {data.Title} ({data.Year})asdfasdfasdfasdf
+            </h1>
+          </div>
+        )}
       </Alert>
 
       <style jsx>{`
         .wrapper {
           margin-bottom: 1rem;
           margin-right: 1rem;
-          width: 15rem;
+          width: 12.87rem;
           display: inline-block;
         }
 
@@ -44,7 +54,16 @@ export default function SearchedMovieCard(props: SearchedMovieCardProps) {
           overflow: hidden;
           white-space: nowrap;
         }
+
+        .modal-content {
+          width: inherit;
+        }
       `}</style>
     </div>
   );
+}
+
+function ModalContent(props: any) {
+  console.log('ModalContent props', props);
+  return <div>hello modal content</div>;
 }
