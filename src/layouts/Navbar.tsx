@@ -1,13 +1,14 @@
-import { Button, Navbar, Alignment, InputGroup } from '@blueprintjs/core';
 import Link from 'next/link';
 import { useCallback, FormEvent, useState } from 'react';
 import { useRouter } from 'next/dist/client/router';
+import { Layout, Menu, Input } from 'antd';
+const { Header } = Layout;
 
 export default function MyNavbar() {
   const [searchString, setSearchString] = useState('');
   const router = useRouter();
   const handleSubmitSearch = useCallback(
-    (evt: FormEvent) => {
+    (_: string, evt: FormEvent) => {
       evt.preventDefault();
 
       router.push('/movies?search=' + searchString);
@@ -23,8 +24,39 @@ export default function MyNavbar() {
   }, [router.pathname]);
 
   return (
-    <div>
-      <Navbar>
+    <Header>
+      <div id="logo"></div>
+      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['movies']}>
+        <Menu.Item key="movies" onClick={handleClickMovies}>
+          movies
+        </Menu.Item>
+
+        <Menu.Item key="counter">
+          <Link href="/counter">counter</Link>
+        </Menu.Item>
+        <div style={{ float: 'right' }}>
+          <Input.Search
+            style={{ width: 200, paddingTop: '16px' }}
+            enterButton
+            onSearch={handleSubmitSearch}
+            onChange={e => setSearchString(e.target.value)}
+            value={searchString}
+            placeholder="e.g. Frozen"
+          />
+        </div>
+      </Menu>
+      <style jsx>{`
+        #logo {
+          width: 120px;
+          height: 31px;
+          background: rgba(255, 255, 255, 0.2);
+          margin: 16px 24px 16px 12px;
+          float: left;
+          text-align: center;
+        }
+      `}</style>
+    </Header>
+    /* <Navbar>
         <Navbar.Group align={Alignment.LEFT}>
           <Link href="/">
             <Navbar.Heading>
@@ -58,7 +90,6 @@ export default function MyNavbar() {
             />
           </form>
         </Navbar.Group>
-      </Navbar>
-    </div>
+      </Navbar> */
   );
 }
