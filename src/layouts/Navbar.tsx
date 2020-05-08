@@ -36,6 +36,7 @@ export default function MyNavbar() {
         </Menu.Item>
         <div style={{ float: 'right' }}>
           <Input.Search
+            id="navbar_search_input"
             style={{ width: 200, paddingTop: '16px' }}
             enterButton
             onSearch={handleSubmitSearch}
