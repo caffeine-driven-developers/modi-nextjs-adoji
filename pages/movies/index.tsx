@@ -1,7 +1,7 @@
 import { useRouter } from 'next/dist/client/router';
 import { useSearch, SearchedMovie } from '../../src/services/omdb';
 import SearchedMovieCard from '../../src/components/SearchedMovieCard';
-import { Icon, Spinner, Alert } from '@blueprintjs/core';
+import { Spin } from 'antd';
 
 type Query = string | null;
 export default function Movies() {
@@ -21,9 +21,7 @@ export default function Movies() {
 
     return (
       <div className="wrapper">
-        <h3 className="bp3-heading">
-          Search movie title looking for <Icon style={{ paddingBottom: 4 }} icon="arrow-up" />
-        </h3>
+        <h3 className="bp3-heading">Search movie title looking for ^</h3>
 
         <style jsx>{`
           .wrapper {
@@ -44,7 +42,7 @@ export default function Movies() {
   if (!data) {
     return (
       <div className="wrapper">
-        <Spinner intent="primary" />
+        <Spin size="large" />
         <style jsx>{`
           .wrapper {
             padding-top: 30vh;
